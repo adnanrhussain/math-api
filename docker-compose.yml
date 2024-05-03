@@ -1,0 +1,15 @@
+name: edu-math-api
+services:
+  edu-math-api:
+    image: 254379453707.dkr.ecr.us-west-2.amazonaws.com/edu-math-api
+    platform: linux/arm64
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+      secrets:
+        - npmrc
+    ports:
+      - "3456:3456"
+secrets:
+  npmrc:
+    file: $HOME/.npmrc

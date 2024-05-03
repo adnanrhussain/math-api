@@ -1,6 +1,7 @@
 FROM node:16-alpine
 WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package.json ./
+RUN npm install
 COPY . .
-CMD yarn test
+RUN npm install -g ts-node
+CMD ["npm", "run", "prod"]
