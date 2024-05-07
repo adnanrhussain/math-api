@@ -34,5 +34,6 @@ module "stack" {
   additional_env_vars = {
     "NODE_ENV"                = "production"
     "PORT"                    = "3456"
+    "SCALING_FACTOR"          = "10" 
   }
 }

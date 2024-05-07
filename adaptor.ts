@@ -29,6 +29,9 @@ export function tex2svg(
   const autoBg = colord(color).isDark() ? "white" : "black";
   const bg = bgColor === "auto" ? autoBg : bgColor;
 
+  const scale = parseInt(process.env.SCALING_FACTOR || '10');
+  console.log(`Scale @ ${process.env.SCALING_FACTOR}x`);
+
   const svg = adaptor
     .innerHTML(html.convert(equation, { display: !isInline }))
     .replace(
@@ -39,9 +42,13 @@ export function tex2svg(
     fill: ${color};
     background-color: ${bg ?? "transparent"};
   }
+  svg {
+    font-size: ${100 * scale}%;
+  }
 </style>`
     );
   if (svg.includes("merror")) {
+    console.error(`svg contains merror`)
     return svg.replace(/<rect.+?><\/rect>/, "");
   }
   return svg;
